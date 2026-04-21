@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emotion Detector</title>
+    <!-- Menghubungkan JS -->
+    <script src="{{ url_for('static', filename='mywebscript.js') }}"></script>
+</head>
+<body style="text-align: center; font-family: Arial, sans-serif; margin-top: 50px;">
+
+    <h2>Emotion Detector</h2>
+    <br>
+    
+    <label for="textToAnalyze">Enter text to analyze:</label><br><br>
+    <textarea id="textToAnalyze" rows="4" cols="50"></textarea>
+    
+    <br><br>
+    <!-- Tombol yang memicu JavaScript -->
+    <button onclick="RunSentimentAnalysis()" style="padding: 10px 20px;">Run Emotion Analysis</button>
+    <br><br>
+    
+    <div id="system_response"></div>
+
+</body>
+</html>
