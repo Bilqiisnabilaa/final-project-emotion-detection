@@ -1,0 +1,131 @@
+# BACA FILE INI! BERIKUT ADALAH TEKS UNTUK DI COPY PASTE KEKOTAK SOAL
+# --------------------------------------------------------------------------------------
+
+# TUGAS 1
+## Kirim URL repositori GitHub
+https://github.com/my-username/final-project-emotion-detection
+
+# TUGAS 2
+## Aktivitas 1: Kirim kode emotion_detection.py
+```python
+import requests
+
+def emotion_detector(text_to_analyze):
+    url = 'https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict'
+    headers = {"grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"}
+    myobj = { "raw_document": { "text": text_to_analyze } }
+    response = requests.post(url, json=myobj, headers=headers)
+    return response.text
+```
+
+## Aktivitas 2: Kirim output terminal
+```text
+>>> from emotion_detection import emotion_detector
+>>> emotion_detector("I love this new technology")
+'{\n  "emotionPredictions": [\n    {\n      "emotion": {\n        "anger": 0.01364663,\n        "disgust": 0.0017160787,\n        "fear": 0.008986979,\n        "joy": 0.9719017,\n        "sadness": 0.05436329\n      },\n      "target": "",\n      "emotionMentions": [\n        ...\n'
+```
+
+
+# TUGAS 3
+## Aktivitas 1: Kirim kode (format output)
+```python
+import json
+import requests
+
+def emotion_detector(text_to_analyze):
+    url = 'https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict'
+    headers = {"grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"}
+    myobj = { "raw_document": { "text": text_to_analyze } }
+    response = requests.post(url, json=myobj, headers=headers)
+    
+    formatted_response = json.loads(response.text)
+    emotions = formatted_response['emotionPredictions'][0]['emotion']
+    
+    return {
+        'anger': emotions['anger'],
+        'disgust': emotions['disgust'],
+        'fear': emotions['fear'],
+        'joy': emotions['joy'],
+        'sadness': emotions['sadness'],
+        'dominant_emotion': max(emotions, key=emotions.get)
+    }
+```
+
+## Aktivitas 2: Kirim output terminal formating
+```text
+>>> from emotion_detection import emotion_detector
+>>> emotion_detector("I love this new technology")
+{'anger': 0.01364663, 'disgust': 0.0017160787, 'fear': 0.008986979, 'joy': 0.9719017, 'sadness': 0.05436329, 'dominant_emotion': 'joy'}
+```
+
+# TUGAS 4
+## Aktivitas 1: URL GitHub file __init__.py
+https://github.com/my-username/final-project-emotion-detection/blob/main/EmotionDetection/__init__.py
+
+## Aktivitas 2: Terminal dari validasi paket Valid EmotionDetection
+```text
+>>> from EmotionDetection.emotion_detection import emotion_detector
+>>> emotion_detector("I love this new technology")
+{'anger': 0.01364663, 'disgust': 0.0017160787, 'fear': 0.008986979, 'joy': 0.9719017, 'sadness': 0.05436329, 'dominant_emotion': 'joy'}
+```
+
+
+# TUGAS 5
+## Aktivitas 1: Kirim kode dari test_emotion_detection.py
+```python
+import unittest
+from EmotionDetection.emotion_detection import emotion_detector
+
+class TestEmotionDetection(unittest.TestCase):
+    def test_emotion_detector(self):
+        self.assertEqual(emotion_detector("I am glad this happened")['dominant_emotion'], 'joy')
+        self.assertEqual(emotion_detector("I am really mad about this")['dominant_emotion'], 'anger')
+        self.assertEqual(emotion_detector("I feel just disgusted just hearing about this")['dominant_emotion'], 'disgust')
+        self.assertEqual(emotion_detector("I am so sad about this")['dominant_emotion'], 'sadness')
+        self.assertEqual(emotion_detector("I am really afraid that this will happen")['dominant_emotion'], 'fear')
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+## Aktivitas 2: Output berhasilnya Unit Test
+```text
+$ python3 test_emotion_detection.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.488s
+
+OK
+```
+
+
+# TUGAS 6
+## Aktivitas 1: Kode server.py penyebaran web aplikasi
+Silakan Salin/Copy isi di dalam file "server.py"
+
+## Aktivitas 2: Screenshot 6b_deployment_test.png
+Gunakan browser Anda (buka tab baru), lalu ketikkan sesuatu lalu tekan tombol submit, atau buat tampilan web berjalan lalu foto/screenshoot seluruh layar Anda. Namai file screenshoot menjadi "6b_deployment_test.png".
+
+
+# TUGAS 7
+## Aktivitas 1: emotion_detector untuk kode 400
+Silakan Copy/Salin seluruh isi tulisan/kode yang ada di dalam "EmotionDetection/emotion_detection.py"
+
+## Aktivitas 2: server.py penanganan kalimat kosong (Invalid text)
+Silakan Copy/Salin seluruh isi tulisan/kode yang ada di dalam file "server.py"
+
+## Aktivitas 3: Screenshot 7c_error_handling_interface.png
+Tampilkan interface web deteksi yang berjalan, biarkan kotak inputnya KOSONG, lalu tekan dan Foto! Muncul hasil ("Invalid text! Please try again!"). Namai ss/foto jadi "7c_error_handling_interface.png"
+
+
+# TUGAS 8
+## Aktivitas 1: Analisis Static Server (Pylint)
+Silakan Salin kembali seluruh file dari "server.py" karena file tersebut sunda ditiadakan eror statisnya.
+
+## Aktivitas 2: Output Terminal Pylint Skor Sempurna
+```text
+$ pylint server.py
+
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
+```
